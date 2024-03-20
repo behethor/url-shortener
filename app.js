@@ -2,10 +2,10 @@ import express, { json } from 'express'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import 'dotenv/config'
-import { corsMiddleware } from '../middleware/cors.js'
-import { createShortenerRouter } from '../routes/shortener.js'
-import { createRedirectRouter } from '../routes/redirect.js'
-import { ShortenerModel } from '../models/firebase.js'
+import { corsMiddleware } from './middleware/cors.js'
+import { createShortenerRouter } from './routes/shortener.js'
+import { createRedirectRouter } from './routes/redirect.js'
+import { ShortenerModel } from './models/firebase.js'
 
 const app = express()
 const __filename = fileURLToPath(import.meta.url)
