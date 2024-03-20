@@ -15,7 +15,7 @@ app.use(json())
 app.use(corsMiddleware())
 app.disable('x-powered-by')
 
-const staticPath = path.join(__dirname, '../web')
+const staticPath = path.join(__dirname, './web')
 app.use(express.static(staticPath))
 app.use('/', createRedirectRouter({ shortenerModel: ShortenerModel }))
 app.use('/api', createShortenerRouter({ shortenerModel: ShortenerModel }))
