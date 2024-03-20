@@ -26,8 +26,8 @@ export class ShortenerModel {
     let url = ''
     const querySnapshot = await getDocs(collection(db, 'urls'))
     querySnapshot.forEach((doc) => {
-      if (Object.keys(doc.data().shortUrl === id)) {
-        url = doc.data().shortUrl
+      if (doc.data().shortUrl === id) {
+        url = doc.data().url
       }
     })
 
@@ -38,13 +38,13 @@ export class ShortenerModel {
     return { url }
   }
 
-  static async create ({ url }) {
+  static async create ({ url, baseUrl }) {
     if (!isValidHttpUrl(url)) {
       return null
     }
 
     const randomString = createRandomString()
-    const shortenedUrl = `http://localhost:3000/${randomString}`
+    const shortenedUrl = `${baseUrl}/${randomString}`
 
     const docRef = await addDoc(collection(db, 'urls'), {
       url,

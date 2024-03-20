@@ -1,7 +1,7 @@
 import cors from 'cors'
 
 const ACCEPTED_ORIGINS = [
-  process.env.FRONTEND_URL || 'http://localhost:8080'
+  process.env.ORIGIN || 'http://localhost:3000'
 ]
 
 export const corsMiddleware = ({ acceptedOrigins = ACCEPTED_ORIGINS } = {}) => cors({

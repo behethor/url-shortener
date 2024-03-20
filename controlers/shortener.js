@@ -5,6 +5,17 @@ export class ShortenerControler {
     this.shortenerModel = shortenerModel
   }
 
+  getByIdRedirect = async (req, res) => {
+    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl
+    const data = await this.shortenerModel.getById({ id: fullUrl })
+
+    if (data?.url) {
+      return res.redirect(data.url)
+    }
+
+    res.redirect('/')
+  }
+
   getById = async (req, res) => {
     const { id } = req.query
 
@@ -20,12 +31,13 @@ export class ShortenerControler {
   create = async (req, res) => {
     const { url } = req.body
     const result = await validateUrl({ url })
+    const baseUrl = req.protocol + '://' + req.get('host')
 
     if (!result) {
       return res.status(400).json({ message: 'Invalid url' })
     }
 
-    const shortenedUrl = await this.shortenerModel.create({ url })
+    const shortenedUrl = await this.shortenerModel.create({ url, baseUrl })
     res.status(201).json(shortenedUrl)
   }
 }
