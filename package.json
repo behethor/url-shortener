@@ -5,8 +5,8 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "node app.js",
-    "dev": "node --watch app.js"
+    "start": "node ./api/index.js",
+    "dev": "node --watch ./api/index.js"
   },
   "repository": {
     "type": "git",
